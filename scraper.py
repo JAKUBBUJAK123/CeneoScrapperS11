@@ -1,6 +1,7 @@
 import requests
 import json
 from bs4 import BeautifulSoup
+import os
 
 def get_element(ancestor, selector = None, attribute = None, return_list = False):
     try:
@@ -49,5 +50,9 @@ while(url):
         url = None
 
 print(len(all_opinions))
+try:
+    os.mkdir('./opinions')
+except FileExistsError:
+    pass
 with open(f"./opinions/{product_code}.json", "w", encoding="UTF-8") as jf:
     json.dump(all_opinions, jf, indent=4,ensure_ascii=False)
